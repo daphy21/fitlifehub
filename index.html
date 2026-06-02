@@ -1,0 +1,1940 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FITLIFEHUB - Fitness & Lifestyle Finds</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FF6B6B;
+            --primary-dark: #EE5A5A;
+
+            --secondary: #4ECDC4;
+            --accent: #FFE66D;
+            --dark: #2D3436;
+            --light: #F7F9FC;
+            --white: #FFFFFF;
+            --gradient-1: #FF6B6B;
+            --gradient-2: #FF8E53;
+            --shadow: 0 10px 40px rgba(0,0,0,0.1);
+            --shadow-hover: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+
+            background: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--light);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        /* Logo Animation */
+        @keyframes pulse-logo {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+            animation: pulse-logo 3s ease-in-out infinite;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(255,107,107,0.4);
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+
+            background: linear-gradient(135deg, var(--dark), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+            color: white !important;
+            padding: 0.6rem 1.5rem;
+            border-radius: 25px;
+            box-shadow: 0 4px 15px rgba(255,107,107,0.3);
+            transition: transform 0.3s, box-shadow 0.3s !important;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255,107,107,0.4);
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #FFF5F5 0%, #F0F9FF 50%, #F5FFFA 100%);
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255,107,107,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 1.5rem;
+            animation: float 3s ease-in-out infinite;
+
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #636E72;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 20px rgba(255,107,107,0.3);
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255,107,107,0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+
+            color: var(--dark);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .hero-stats {
+
+            display: flex;
+            gap: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #636E72;
+            font-weight: 500;
+        }
+
+        /* Hero Image Grid */
+        .hero-visual {
+            position: relative;
+            height: 600px;
+        }
+
+        .floating-card {
+            position: absolute;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .floating-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: var(--shadow-hover);
+
+        }
+
+        .floating-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-1 {
+            width: 280px;
+            height: 350px;
+            top: 0;
+            left: 0;
+            z-index: 3;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .card-2 {
+            width: 240px;
+            height: 300px;
+
+            top: 100px;
+            right: 0;
+            z-index: 2;
+            animation: float 5s ease-in-out infinite 0.5s;
+        }
+
+        .card-3 {
+            width: 200px;
+            height: 250px;
+            bottom: 0;
+            left: 100px;
+            z-index: 1;
+            animation: float 4.5s ease-in-out infinite 1s;
+        }
+
+        .card-tag {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+
+            background: rgba(255,255,255,0.95);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--primary);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Categories Section */
+        .categories {
+            padding: 5rem 2rem;
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+
+        .section-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(255,107,107,0.1), rgba(255,142,83,0.1));
+            color: var(--primary);
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .section-header p {
+            color: #636E72;
+            font-size: 1.1rem;
+        }
+
+        .category-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            transition: all 0.4s;
+
+            cursor: pointer;
+            position: relative;
+            border: 2px solid transparent;
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
+        }
+
+        .category-img {
+            height: 200px;
+            background: linear-gradient(135deg, var(--light), #E8F4F8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .category-img::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent, rgba(255,107,107,0.1));
+        }
+
+        .category-info {
+            padding: 1.5rem;
+        }
+
+        .category-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+
+        }
+
+        .category-info p {
+            color: #636E72;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .category-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-count {
+            font-size: 0.85rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .category-arrow {
+
+            width: 35px;
+            height: 35px;
+            background: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            transition: all 0.3s;
+        }
+
+        .category-card:hover .category-arrow {
+            background: var(--primary);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        /* Featured Products - Pinterest Style */
+        .featured {
+
+            padding: 5rem 2rem;
+            background: var(--light);
+        }
+
+        .masonry-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            column-count: 4;
+            column-gap: 1.5rem;
+        }
+
+        @media (max-width: 1200px) {
+            .masonry-grid { column-count: 3; }
+        }
+
+        @media (max-width: 768px) {
+            .masonry-grid { column-count: 2; }
+        }
+
+        @media (max-width: 480px) {
+            .masonry-grid { column-count: 1; }
+
+        }
+
+        .pin-card {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            transition: all 0.4s;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .pin-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .pin-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pin-image img {
+            width: 100%;
+            display: block;
+            transition: transform 0.5s;
+        }
+
+        .pin-card:hover .pin-image img {
+            transform: scale(1.08);
+        }
+
+        .pin-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            background: linear-gradient(to top, rgba(0,0,0,0.6), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+        }
+
+        .pin-card:hover .pin-overlay {
+            opacity: 1;
+        }
+
+        .pin-save-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--primary);
+            color: white;
+            border: none;
+
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .pin-card:hover .pin-save-btn {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .pin-save-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .pin-actions {
+            display: flex;
+
+            gap: 0.8rem;
+            margin-top: 0.8rem;
+        }
+
+        .pin-action-btn {
+            background: rgba(255,255,255,0.9);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark);
+            transition: all 0.3s;
+        }
+
+        .pin-action-btn:hover {
+            background: white;
+            transform: scale(1.1);
+
+        }
+
+        .pin-content {
+            padding: 1.2rem;
+        }
+
+        .pin-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            font-size: 0.95rem;
+        }
+
+        .pin-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .pin-rating {
+
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.85rem;
+            color: #636E72;
+        }
+
+        .stars {
+            color: var(--accent);
+        }
+
+        .pin-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+
+        }
+
+        /* Trending Section */
+        .trending {
+            padding: 5rem 2rem;
+            background: white;
+        }
+
+        .trending-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .trend-card {
+            background: linear-gradient(135deg, #FFF5F5, #FFF);
+            border-radius: 24px;
+
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s;
+            border: 2px solid transparent;
+        }
+
+        .trend-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .trend-number {
+            font-size: 4rem;
+            font-weight: 800;
+            color: rgba(255,107,107,0.1);
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-family: 'Playfair Display', serif;
+
+        }
+
+        .trend-icon {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .trend-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--dark);
+        }
+
+
+        .trend-card p {
+            color: #636E72;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .trend-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s;
+        }
+
+        .trend-link:hover {
+            gap: 0.8rem;
+        }
+
+
+        /* Newsletter */
+        .newsletter {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, var(--dark), #1a1a2e);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,107,107,0.1) 0%, transparent 50%);
+        }
+
+
+        .newsletter-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .newsletter h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter p {
+            color: rgba(255,255,255,0.7);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            border: 2px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.05);
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+
+        .newsletter-input::placeholder {
+            color: rgba(255,255,255,0.4);
+        }
+
+        .newsletter-input:focus {
+            border-color: var(--primary);
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand .logo-text {
+            color: white;
+            -webkit-text-fill-color: white;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .footer-brand p {
+            color: rgba(255,255,255,0.6);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+
+            gap: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-column h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .footer-column a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: rgba(255,255,255,0.4);
+            font-size: 0.9rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+
+        .footer-links a {
+            color: rgba(255,255,255,0.4);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 968px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+
+            .hero p {
+                margin: 0 auto 2rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .hero-visual {
+                display: none;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .masonry-grid {
+                column-count: 2;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+
+        /* Loading Animation */
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--dark);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            opacity: 0;
+            transition: all 0.4s;
+            z-index: 9999;
+
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 9999;
+
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            animation: modalPop 0.3s ease-out;
+        }
+
+        @keyframes modalPop {
+
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .modal h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .modal p {
+            color: #636E72;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-close {
+            background: var(--light);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--dark);
+            transition: all 0.3s;
+        }
+
+
+        .modal-close:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Scroll to top */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255,107,107,0.4);
+            z-index: 999;
+            border: none;
+            font-size: 1.2rem;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-heart-pulse"></i>
+                </div>
+                <span class="logo-text">FITLIFEHUB</span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#featured">Featured</a></li>
+                <li><a href="#trending">Trending</a></li>
+
+                <li><a href="#about">About</a></li>
+                <li><a href="#newsletter" class="nav-cta">Join Community</a></li>
+            </ul>
+
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-fire"></i>
+                    Trending Now in 2026
+                </div>
+
+                <h1>Discover Your <span>Best Self</span> With Curated Fitness Finds</h1>
+                <p>We scour Pinterest and the web to bring you the most effective fitness gear, wellness products, and lifestyle essentials that actually work.</p>
+                
+                <div class="hero-buttons">
+                    <a href="#featured" class="btn-primary">
+                        <i class="fas fa-compass"></i>
+                        Explore Products
+                    </a>
+                    <a href="#categories" class="btn-secondary">
+                        <i class="fas fa-play-circle"></i>
+                        Watch Reviews
+                    </a>
+
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" id="stat-products">2,500+</span>
+                        <span class="stat-label">Products Curated</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="stat-users">50K+</span>
+                        <span class="stat-label">Happy Shoppers</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="stat-savings">$1M+</span>
+                        <span class="stat-label">Saved This Year</span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="floating-card card-1" onclick="showProductDetail('Yoga Essentials Set')">
+                    <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&h=500&fit=crop" alt="Yoga">
+                    <span class="card-tag">Yoga & Mindfulness</span>
+                </div>
+                <div class="floating-card card-2" onclick="showProductDetail('Home Gym Setup')">
+                    <img src="https://images.unsplash.com/
+
+photo-1534438327276-14e5300c3a48?w=400&h=500&fit=crop" alt="Gym">
+                    <span class="card-tag">Home Fitness</span>
+                </div>
+                <div class="floating-card card-3" onclick="showProductDetail('Nutrition Supplements')">
+                    <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400&h=500&fit=crop" alt="Nutrition">
+                    <span class="card-tag">Clean Eating</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+
+    <section class="categories" id="categories">
+        <div class="section-header">
+            <span class="section-tag">Browse Categories</span>
+            <h2>Find Your Perfect Fit</h2>
+            <p>From yoga mats to protein powders, we've organized the best affiliate finds into easy-to-browse categories.</p>
+        </div>
+
+        <div class="category-grid">
+            <div class="category-card" onclick="filterCategory('fitness')">
+                <div class="category-img">
+                    <i class="fas fa-dumbbell" style="color: var(--primary);"></i>
+                </div>
+                <div class="category-info">
+                    <h3>Fitness Equipment</h3>
+                    <p>Home gyms, weights, 
+
+resistance bands, and cardio essentials</p>
+                    <div class="category-meta">
+                        <span class="product-count">342 Products</span>
+                        <div class="category-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-card" onclick="filterCategory('activewear')">
+                <div class="category-img">
+                    <i class="fas fa-tshirt" style="color: var(--secondary);"></i>
+                </div>
+                <div class="category-info">
+                    <h3>Activewear</h3>
+
+                    <p>Stylish leggings, sports bras, and performance apparel</p>
+                    <div class="category-meta">
+                        <span class="product-count">518 Products</span>
+                        <div class="category-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-card" onclick="filterCategory('nutrition')">
+                <div class="category-img">
+                    <i class="fas fa-apple-alt" style="color: #00B894;"></i>
+                </div>
+                <div class="category-info">
+                    <h3>Nutrition</h3>
+
+                    <p>Proteins, supplements, meal prep tools, and healthy snacks</p>
+                    <div class="category-meta">
+                        <span class="product-count">267 Products</span>
+                        <div class="category-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-card" onclick="filterCategory('wellness')">
+                <div class="category-img">
+                    <i class="fas fa-spa" style="color: #A29BFE;"></i>
+                </div>
+                <div class="category-info">
+                    <h3>Wellness & Recovery</h3>
+
+                    <p>Foam rollers, massagers, sleep aids, and relaxation tools</p>
+                    <div class="category-meta">
+                        <span class="product-count">189 Products</span>
+                        <div class="category-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-card" onclick="filterCategory('tech')">
+                <div class="category-img">
+                    <i class="fas fa-watch" style="color: #FD79A8;"></i>
+                </div>
+                <div class="category-info">
+                    <h3>Fitness Tech</h3>
+
+                    <p>Smart watches, fitness trackers, and health monitoring devices</p>
+                    <div class="category-meta">
+                        <span class="product-count">156 Products</span>
+                        <div class="category-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-card" onclick="filterCategory('outdoor')">
+                <div class="category-img">
+                    <i class="fas fa-hiking" style="color: #FDCB6E;"></i>
+                </div>
+                <div class="category-info">
+
+                    <h3>Outdoor Adventure</h3>
+                    <p>Hiking gear, camping essentials, and outdoor fitness equipment</p>
+                    <div class="category-meta">
+                        <span class="product-count">203 Products</span>
+                        <div class="category-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products (Pinterest Style) -->
+    <section class="featured" id="featured">
+        <div class="section-header">
+
+            <span class="section-tag">Editor's Picks</span>
+            <h2>Pinterest Favorites</h2>
+            <p>The most saved, shared, and loved fitness products trending right now.</p>
+        </div>
+
+        <div class="masonry-grid" id="productGrid">
+            <!-- Products will be dynamically loaded -->
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+            <button class="btn-primary" onclick="loadMoreProducts()">
+                <i class="fas fa-spinner"></i>
+                Load More Finds
+            </button>
+
+        </div>
+    </section>
+
+    <!-- Trending Topics -->
+    <section class="trending" id="trending">
+        <div class="section-header">
+            <span class="section-tag">What's Hot</span>
+            <h2>Trending This Week</h2>
+            <p>Stay ahead of the curve with our weekly trending reports.</p>
+        </div>
+
+        <div class="trending-grid">
+            <div class="trend-card">
+                <span class="trend-number">01</span>
+                <div class="trend-icon">🔥</div>
+                <h3>Hot Girl Walk Essentials</h3>
+                <p>The viral TikTok trend that's 
+
+taking over Pinterest. Discover the perfect walking gear, from weighted vests to the most comfortable sneakers.</p>
+                <a href="#" class="trend-link" onclick="showComingSoon(event)">
+                    View Collection <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="trend-card">
+                <span class="trend-number">02</span>
+                <div class="trend-icon">🏠</div>
+                <h3>Micro Home Gyms</h3>
+                <p>Space-saving equipment for apartment dwellers. Foldable treadmills, doorframe pull-up bars, and collapsible squat racks.</p>
+                <a href="#" class="trend-link" onclick="showComingSoon(event)">
+
+                    View Collection <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="trend-card">
+                <span class="trend-number">03</span>
+                <div class="trend-icon">🧘</div>
+                <h3>Recovery & Sleep Tech</h3>
+                <p>From red light therapy masks to weighted sleep masks, discover the latest in recovery technology that's dominating wellness boards.</p>
+                <a href="#" class="trend-link" onclick="showComingSoon(event)">
+                    View Collection <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter" id="newsletter">
+        <div class="newsletter-container">
+            <span class="section-tag" style="background: rgba(255,255,255,0.1); color: white; margin-bottom: 1.5rem;">
+                <i class="fas fa-envelope"></i> Weekly Digest
+            </span>
+            <h2>Get the Best Deals Delivered</h2>
+            <p>Join 50,000+ fitness enthusiasts who get our weekly curated list of the best Pinterest finds, exclusive discounts, and trending products.</p>
+            
+            <form class="newsletter-form" onsubmit="handleSubscribe(event)">
+
+                <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+                <button type="submit" class="btn-primary" style="white-space: nowrap;">
+                    Subscribe Now
+                </button>
+            </form>
+            
+            <p style="margin-top: 1rem; font-size: 0.85rem; color: rgba(255,255,255,0.4);">
+                <i class="fas fa-shield-alt"></i> No spam, ever. Unsubscribe anytime.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="#" class="logo" style="margin-bottom: 1rem;">
+                    <div class="logo-icon" style="width: 40px; height: 40px; font-size: 1.2rem;">
+                        <i class="fas fa-heart-pulse"></i>
+                    </div>
+                    <span class="logo-text" style="font-size: 1.5rem;">FITLIFEHUB</span>
+                </a>
+                <p>Your trusted source for the best fitness, wellness, and lifestyle products. We curate, you thrive.</p>
+                <div class="social-links">
+                    <a href="#" onclick="showComingSoon(event)"><i 
+
+class="fab fa-pinterest-p"></i></a>
+                    <a href="#" onclick="showComingSoon(event)"><i class="fab fa-instagram"></i></a>
+                    <a href="#" onclick="showComingSoon(event)"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" onclick="showComingSoon(event)"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h4>Shop</h4>
+                <ul>
+                    <li><a href="#" onclick="showComingSoon(event)">Fitness Equipment</a></li>
+                    <li><a href="#" onclick="showComingSoon(event)">Active
+
+wear</a></li>
+                    <li><a href="#" onclick="showComingSoon(event)">Nutrition</a></li>
+                    <li><a href="#" onclick="showComingSoon(event)">Wellness</a></li>
+                    <li><a href="#" onclick="showComingSoon(event)">Fitness Tech</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#" onclick="showComingSoon(event)">About Us</a></li>
+                    <li><a href="#" onclick="showComingSoon(event)">How 
+
+It Works</a></li>
+                    <li><a href="#" onclick="showComingSoon(event)">Affiliate Disclosure</a></li>
+                    <li><a href="#" onclick="showComingSoon(event)">Contact</a></li>
+                    <li><a href="#" onclick="showComingSoon(event)">Careers</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#" onclick="showComingSoon(event)">Help Center</a></li>
+                    <li><a href="#" onclick="showComingSoon(event)">Privac
+
+y Policy</a></li>
+                    <li><a href="#" onclick="showComingSoon(event)">Terms of Service</a></li>
+                    <li><a href="#" onclick="showComingSoon(event)">Cookie Settings</a></li>
+                    <li><a href="#" onclick="showComingSoon(event)">Sitemap</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 FITLIFEHUB. All rights reserved. Made with <i class="fas fa-heart" style="color: var(--primary);"></i> for fitness lovers.</p>
+            <div class="footer-links">
+                <a href="#" 
+
+onclick="showComingSoon(event)">Privacy</a>
+                <a href="#" onclick="showComingSoon(event)">Terms</a>
+                <a href="#" onclick="showComingSoon(event)">Cookies</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Action completed!</span>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="modal" 
+
+onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-icon">
+                <i class="fas fa-rocket"></i>
+            </div>
+            <h3>Coming Soon!</h3>
+            <p>This feature is currently in development. Stay tuned for updates!</p>
+            <button class="modal-close" onclick="closeModal()">Got it!</button>
+        </div>
+    </div>
+
+    <!-- Scroll to Top -->
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+
+        // Product Data
+        const products = [
+            {
+                id: 1,
+                title: "Premium Yoga Mat - Non Slip Eco-Friendly",
+                price: "$49.99",
+                rating: 4.8,
+                reviews: 2341,
+                image: "https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=400&h=600&fit=crop",
+                badge: "Best Seller",
+                category: "fitness"
+            },
+            {
+                id: 2,
+                title: "Adjustable Dumbbell Set 5-52.5 lbs",
+                price: "$299.99",
+
+                rating: 4.9,
+                reviews: 892,
+                image: "https://images.unsplash.com/photo-1638536532686-d610adfc8e5c?w=400&h=500&fit=crop",
+                badge: "Trending",
+                category: "fitness"
+            },
+            {
+                id: 3,
+                title: "High-Waisted Seamless Leggings",
+                price: "$38.00",
+                rating: 4.7,
+                reviews: 5678,
+                image: "https://images.unsplash.com/photo-1506629082955-511b1aa562c8?w=400&h=700&fit=crop",
+                badge: null,
+
+                category: "activewear"
+            },
+            {
+                id: 4,
+                title: "Plant-Based Protein Powder - Vanilla",
+                price: "$54.99",
+                rating: 4.6,
+                reviews: 1234,
+                image: "https://images.unsplash.com/photo-1579722821273-0f6c7d44362f?w=400&h=450&fit=crop",
+                badge: "Top Rated",
+                category: "nutrition"
+            },
+            {
+                id: 5,
+                title: "Smart Fitness Watch with GPS",
+                price: "$199.99",
+
+                rating: 4.5,
+                reviews: 3456,
+                image: "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=400&h=550&fit=crop",
+                badge: null,
+                category: "tech"
+            },
+            {
+                id: 6,
+                title: "Foam Roller Deep Tissue Massage",
+                price: "$29.99",
+                rating: 4.8,
+                reviews: 4567,
+                image: "https://images.unsplash.com/photo-1600881333168-2ef49b341f30?w=400&h=400&fit=crop",
+                badge: "Sale",
+
+                category: "wellness"
+            },
+            {
+                id: 7,
+                title: "Resistance Bands Set of 5",
+                price: "$19.99",
+                rating: 4.7,
+                reviews: 8901,
+                image: "https://images.unsplash.com/photo-1598289431512-b97b0917affc?w=400&h=600&fit=crop",
+                badge: null,
+                category: "fitness"
+            },
+            {
+                id: 8,
+                title: "Stainless Steel Water Bottle 32oz",
+                price: "$24.99",
+                rating: 4.9,
+
+                reviews: 6789,
+                image: "https://images.unsplash.com/photo-1602143407151-01114192003f?w=400&h=500&fit=crop",
+                badge: "Eco Friendly",
+                category: "nutrition"
+            },
+            {
+                id: 9,
+                title: "Running Shoes - Ultra Boost",
+                price: "$129.99",
+                rating: 4.6,
+                reviews: 2345,
+                image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=650&fit=crop",
+                badge: null,
+                category: "activewear"
+
+            },
+            {
+                id: 10,
+                title: "Kettlebell Cast Iron 25lb",
+                price: "$44.99",
+                rating: 4.8,
+                reviews: 1234,
+                image: "https://images.unsplash.com/photo-1586401100385-635f5d8d14b9?w=400&h=480&fit=crop",
+                badge: null,
+                category: "fitness"
+            },
+            {
+                id: 11,
+                title: "Meditation Cushion Set",
+                price: "$39.99",
+                rating: 4.7,
+                reviews: 876,
+                image: "https://
+
+images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=520&fit=crop",
+                badge: "New",
+                category: "wellness"
+            },
+            {
+                id: 12,
+                title: "Meal Prep Containers Set",
+                price: "$34.99",
+                rating: 4.5,
+                reviews: 5432,
+                image: "https://images.unsplash.com/photo-1543353071-10c8ba85a904?w=400&h=450&fit=crop",
+                badge: null,
+                category: "nutrition"
+            }
+        ];
+
+        let currentProducts = [...products];
+        let loadedCount = 8;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            renderProducts();
+            animateStats();
+            setupScrollEffects();
+        });
+
+        // Render Products
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = '';
+            
+            currentProducts.slice(0, loadedCount).forEach(product => {
+                const card = 
+
+createProductCard(product);
+                grid.appendChild(card);
+            });
+        }
+
+        function createProductCard(product) {
+            const div = document.createElement('div');
+            div.className = 'pin-card';
+            div.innerHTML = `
+                <div class="pin-image">
+                    <img src="${product.image}" alt="${product.title}" loading="lazy">
+                    ${product.badge ? `<span class="pin-badge">${product.badge}</span>` : ''}
+                    <button class="pin-save-btn" onclick="saveProduct('${product.title}')">
+                        <i class="fas fa-thumbtack"></i> Save
+                    </button>
+
+                    <div class="pin-overlay">
+                        <div class="pin-actions">
+                            <button class="pin-action-btn" onclick="shareProduct('${product.title}')" title="Share">
+                                <i class="fas fa-share"></i>
+                            </button>
+                            <button class="pin-action-btn" onclick="showProductDetail('${product.title}')" title="View">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pin-content">
+                    <div class="pin-title">${product.title}</div>
+                    <div class="pin-price">$
+
+{product.price}</div>
+                    <div class="pin-rating">
+                        <span class="stars">${'★'.repeat(Math.floor(product.rating))}${'☆'.repeat(5-Math.floor(product.rating))}</span>
+                        <span>${product.rating} (${product.reviews.toLocaleString()})</span>
+                    </div>
+                </div>
+            `;
+            return div;
+        }
+
+        // Load More
+        function loadMoreProducts() {
+            loadedCount += 4;
+            if (loadedCount > currentProducts.length) {
+                // Generate more random 
+
+products
+                for (let i = 0; i < 4; i++) {
+                    const randomProduct = products[Math.floor(Math.random() * products.length)];
+                    const newProduct = {
+                        ...randomProduct,
+                        id: Date.now() + i,
+                        title: randomProduct.title + ' (New Arrival)',
+                        price: randomProduct.price
+                    };
+                    currentProducts.push(newProduct);
+                }
+            }
+            renderProducts();
+            showToast('More products loaded!');
+        }
+
+        // Filter Category
+
+        function filterCategory(category) {
+            currentProducts = products.filter(p => p.category === category);
+            loadedCount = 8;
+            renderProducts();
+            document.getElementById('featured').scrollIntoView({ behavior: 'smooth' });
+            showToast(`Showing ${category} products`);
+        }
+
+        // Save Product
+        function saveProduct(title) {
+            showToast(`"${title}" saved to your board!`);
+        }
+
+        // Share Product
+        function shareProduct(title) {
+            if (navigator.share) {
+
+                navigator.share({
+                    title: title,
+                    text: `Check out this amazing find on FITLIFEHUB: ${title}`,
+                    url: window.location.href
+                });
+            } else {
+                showToast('Link copied to clipboard!');
+            }
+        }
+
+        // Show Product Detail
+        function showProductDetail(title) {
+            showToast(`Opening details for: ${title}`);
+        }
+
+        // Newsletter
+        function handleSubscribe(e) {
+            e.preventDefault();
+
+            const email = e.target.querySelector('input').value;
+            showToast(`Welcome! Confirmation sent to ${email}`);
+            e.target.reset();
+        }
+
+        // Toast
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // Modal
+        function showComingSoon(e) {
+            e.preventDefault();
+            document.getElementById('modal').classList.add('active');
+        }
+
+        function closeModal(e) {
+            if (!e || e.target === document.getElementById('modal')) {
+                document.getElementById('modal').classList.remove('active');
+            }
+        }
+
+        // Mobile Menu
+        function toggleMobileMenu() {
+            showToast('Mobile menu coming soon!');
+
+        }
+
+        // Scroll Effects
+        function setupScrollEffects() {
+            const navbar = document.querySelector('.navbar');
+            const scrollTop = document.getElementById('scrollTop');
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    navbar.style.padding = '0.5rem 0';
+                    scrollTop.classList.add('visible');
+                } else {
+                    navbar.style.padding = '1rem 0';
+                    scrollTop.classList.remove('visible');
+                }
+
+            });
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Animate Stats
+        function animateStats() {
+            const stats = [
+                { id: 'stat-products', target: 2500, suffix: '+' },
+                { id: 'stat-users', target: 50, suffix: 'K+' },
+                { id: 'stat-savings', target: 1, suffix: 'M+' }
+            ];
+
+            const observer = new IntersectionObserver((entries) => {
+
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        stats.forEach(stat => {
+                            animateValue(stat.id, 0, stat.target, 2000, stat.suffix);
+                        });
+                        observer.disconnect();
+                    }
+                });
+            });
+
+            observer.observe(document.querySelector('.hero-stats'));
+        }
+
+        function animateValue(id, start, end, duration, suffix) {
+            const obj = document.getElementById(id);
+            const range = end - start;
+
+            const minTimer = 50;
+            let stepTime = Math.abs(Math.floor(duration / range));
+            stepTime = Math.max(stepTime, minTimer);
+            
+            let startTime = new Date().getTime();
+            let endTime = startTime + duration;
+            let timer;
+            
+            function run() {
+                let now = new Date().getTime();
+                let remaining = Math.max((endTime - now) / duration, 0);
+                let value = Math.round(end - (remaining * range));
+                obj.innerHTML = value + suffix;
+                if (value == end) {
+                    clearInterval(timer);
+                }
+
+            }
+            
+            timer = setInterval(run, stepTime);
+            run();
+        }
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>
